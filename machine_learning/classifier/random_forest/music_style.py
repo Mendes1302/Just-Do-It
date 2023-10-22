@@ -7,6 +7,8 @@ from sklearn import metrics
 import pandas as pd
 import numpy as np
 import joblib 
+import nltk
+nltk.download('stopwords')
 
 class Mustyle:
     def __init__(self) -> None:
@@ -17,7 +19,7 @@ class Mustyle:
         the list of Portuguese stopwords, and variables to store the model and test data.
         """
         __url = "http://robsonfernandes.net/cci/dataset_genero_musical.xlsx"
-        self._df_lyrics = pd.read_excel(__url)
+        self._df_lyrics = pd.read_excel(__url, engine="openpyxl")
         self._list_stops_words = stopwords.words("portuguese")
         self.classify = None
         self.X_test = None
