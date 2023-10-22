@@ -1,37 +1,38 @@
 from random import randint
 
 
-def counter(number_list, n) -> int:
+def _get_high_value(numbers_lists, high) -> int:
     """
-    Recursively counts the number of elements in a list.
+    Recursively finds the highest value in a list.
 
     Args:
-    - number_list (list): The list of numbers to count.
-    - n (int): A parameter used in the recursive counting (default: 0).
+    - numbers_lists (list): The list of numbers to find the highest value in.
+    - high (int): The current highest value found in the list (default: 0).
 
     Returns:
-    - int: The total count of elements in the list.
+    - int: The highest value in the list.
     """
-    if number_list == []:
-        return 0
-    number_list.pop(0)
-    return 1 + counter(number_list, n + 1)
+    if numbers_lists == []:
+        return high
+    value = numbers_lists.pop(0)
+    if value > high:
+        high = value
+    return _get_high_value(numbers_lists, high)
 
 
 def main() -> None:
     """
-    Main function to generate a random list of numbers and count its size.
+    Main function to generate a random list of numbers and find the highest value.
 
-    This function generates a random list of numbers, counts its size using the 'counter' function,
-    and checks if the result matches the actual size of the list.
+    This function generates a random list of numbers, finds the highest value using the '_get_high_value' function,
+    and checks if the result matches the actual highest value in the list.
     """
     last_number = randint(3, 150)
     numbers_lists = [randint(0, last_number) for _ in range(last_number + 1)]
-
-    size_list = len(numbers_lists)
-    results = counter(numbers_lists[:], 0)
-    print(f"Size List: {results}")
-    print(f"[Size List] Check Values: {results == size_list}")
+    
+    high = _get_high_value(numbers_lists[:], 0)
+    print(f"HIGH: {high}")
+    print(f"[HIGH]      Check Values: {high == max(numbers_lists)}")
 
 
 if __name__ == '__main__':
