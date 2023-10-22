@@ -2,6 +2,11 @@
 
 Mustyle is a Python program for classifying music genres based on song lyrics. It uses a RandomForest classification model and is designed to work with Portuguese song lyrics. This README provides instructions on how to use the program and what it does.
 
+## Creaters
+- Lucas Mendes Barbosa
+- Maria Eduarda Lingo de Almeida
+
+
 ## Features
 
 - Loads a dataset of song lyrics.
