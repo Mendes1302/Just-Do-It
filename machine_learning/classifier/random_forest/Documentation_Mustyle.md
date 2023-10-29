@@ -4,7 +4,6 @@ Mustyle is a Python program for classifying music genres based on song lyrics. I
 
 ## Creaters
 - Lucas Mendes Barbosa
-- Maria Eduarda Lingo de Almeida
 
 
 ## Features
@@ -28,42 +27,63 @@ Make sure you have the following installed:
   - pandas
   - nltk
   - joblib
+  - uvicorn
+  - fastapi
 
-### Usage (Component)
-  1. Import Libraries
-   ```python
-    # Import the necessary libraries
-    import joblib
-   ```
-  2. Load the Trained Model
-   ```python
-    # Specify the path to the saved model file
-    component_name = 'ai_component_cla_lyrics.mustyle'
-    
-    # Load the trained classification model using joblib
-    component_ai = joblib.load(component_name)
-   ```
-  3. Make Predictions
-   ```python
-    # Input the lyrics of a song you want to classify
-    song_lyrics = "This is the lyrics of a song."
-    
-    # Use the trained model to predict the music genre probabilities
-    genre_probabilities = component_ai.predict_proba([song_lyrics])
-    
-    # Display the predicted genre probabilities
-    print(genre_probabilities)
-   ```
+### Usage (API)
 
-  4. Complete Code Example
-   ```python
-    import joblib
-    
-    component_name = 'ai_component_cla_lyrics.mustyle'
-    song_lyrics = "This is the lyrics of a song."
-    component_ai = joblib.load(component_name)
-    genre_probabilities = component_ai.predict_proba([song_lyrics])
-    
-    print(genre_probabilities)
+The Mustyle API allows you to predict music styles based on song lyrics. Below, you'll find information on how to use the API, along with examples of making requests.
 
-   ```
+#### API Base URL
+
+The base URL for the Mustyle API is `http://127.0.0.1:8000/` by default. You can replace this with the appropriate URL if you deploy the API to a different location.
+
+#### Predict Music Style
+
+To predict the music style for a given song, you can make a GET request to the `/api/v1/predict_style` endpoint. You need to provide the song lyrics as a query parameter.
+
+#### Endpoint
+> GET /api/v1/predict_style
+
+
+#### Parameters
+
+- `song` (string): The lyrics of the song for which you want to predict the music style.
+
+#### Example Request
+
+You can make a GET request to the API using various tools, libraries, or programming languages. Below is an example using Python's `requests` library:
+
+```python
+import requests
+
+# Specify the API endpoint URL
+api_url = "http://127.0.0.1:8000/api/v1/predict_style"
+
+# Define the query parameter
+song_lyrics = "Your song lyrics go here"
+params = {"song": song_lyrics}
+
+# Make a GET request to the API
+response = requests.get(api_url, params=params)
+
+# Check the API response and extract the predicted style
+if response.status_code == 200:
+    result = response.json()
+    predicted_style = result['results']['predicted_style']
+    accuracy = result['results']['accuracy']
+    print(f"Predicted Style: {predicted_style}")
+    print(f"Accuracy: {accuracy}")
+else:
+    print("Error:", response.status_code, response.text)
+```
+#### Example Response
+```
+{
+    "results": {
+        "predicted_style": "Pop",
+        "accuracy": 0.85
+    }
+}
+```
+
