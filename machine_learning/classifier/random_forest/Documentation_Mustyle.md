@@ -82,7 +82,7 @@ else:
 {
     "results": {
         "predicted_style": "GOSPEL",
-        "accuracy": 0.85
+        "accuracy": 0.79
     }
 }
 ```
