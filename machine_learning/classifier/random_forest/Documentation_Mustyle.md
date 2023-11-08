@@ -81,7 +81,7 @@ else:
 ```
 {
     "results": {
-        "predicted_style": "Pop",
+        "predicted_style": "GOSPEL",
         "accuracy": 0.85
     }
 }
